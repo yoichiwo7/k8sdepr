@@ -2,12 +2,38 @@ package analyzer
 
 // DeprecationInfo is Kubernetes API deprecation/removal information
 type DeprecationInfo struct {
-	Name string
-	Kind string
-	DeprecatedIn string
-	RemovedIn string
+	APIVersion     string
+	Kind           string
+	DeprecatedIn   string
+	RemovedIn      string
 	ReplacementAPI string
+}
 
+type DeprecationKey struct {
+	APIVersion string
+	Kind       string
+}
+
+var deprecationMap map[DeprecationKey]DeprecationInfo = nil
+
+// GetDeprecationMap returns Kubernetes API deprecation/removal map
+func GetDeprecationMap() map[DeprecationKey]DeprecationInfo {
+	if deprecationMap != nil {
+		return deprecationMap
+	}
+	deprecationMap = map[DeprecationKey]DeprecationInfo{}
+	for _, depr := range DeprecationInfoList {
+		key := DeprecationKey{APIVersion: depr.APIVersion, Kind: depr.Kind}
+		value := DeprecationInfo{
+			APIVersion:     depr.APIVersion,
+			Kind:           depr.Kind,
+			DeprecatedIn:   depr.DeprecatedIn,
+			RemovedIn:      depr.RemovedIn,
+			ReplacementAPI: depr.ReplacementAPI,
+		}
+		deprecationMap[key] = value
+	}
+	return deprecationMap
 }
 
 // DeprecationInfoList is a set of apiVersions and if they are deprecated or not.

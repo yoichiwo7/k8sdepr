@@ -1,7 +1,16 @@
 Go code analyzer for Kubernetes API deprecation/removal.
 
+# Overview
+
 As Kubernetes version goes up, the resource API such as `apps/v1beta2:Deployment` will be deprecated/removed.
+If you are developing or using custom Kubernetes controller/operator, you need to track API deprecation/removal
+to ensure the controller/operator works correctly even after upgrading the Kubernetes cluster to new version.
+
 `k8sdepr` detects these API deprecation/removal in Go codes; based on the specified target Kubernetes version.
+
+- Detects resource API deprecation/removal based on target Kubernetes version.
+- Allows to set target Kubernetes version via CLI parameter.
+- Suggests replacement API for deprecated/removed API.
 
 If you are interested in detecting API deprecation/removal in YAML manifests and Kubernetes cluster resources, then check follwing tools:
 
@@ -15,7 +24,7 @@ go get -u github.com/yoichiwo7/k8sdepr
 
 # Usage
 
-- `-targetVersion` falg must be set. The value must follow semantic version. (ex. `v1.16.0`)
+- `-targetVersion` flag must be set. The value must follow semantic version. (ex. `v1.16.0`)
 
 ```
 k8sdepr -targetVersion VERSION [-flag] [package]

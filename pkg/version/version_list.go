@@ -1,4 +1,4 @@
-package analyzer
+package version
 
 // DeprecationInfo is Kubernetes API deprecation/removal information
 type DeprecationInfo struct {

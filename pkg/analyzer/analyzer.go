@@ -8,7 +8,10 @@ import (
 	"golang.org/x/mod/semver"
 	"golang.org/x/tools/go/analysis"
 	"golang.org/x/tools/go/analysis/passes/inspect"
+
 	//"golang.org/x/tools/go/analysis/unitchecker"
+
+	"github.com/yoichiwo7/k8sdepr/pkg/version"
 )
 
 const Doc = `find kubernetes api deprecation/removal in target version.
@@ -48,7 +51,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 		return nil, fmt.Errorf("invalid semver: %v", targetVersion)
 	}
 
-	deprecationMap := GetDeprecationMap()
+	deprecationMap := version.GetDeprecationMap()
 
 	for _, f := range pass.Files {
 		importPathMap := getImportPathMap(f.Imports)
@@ -62,7 +65,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 			}
 
 			// Check Kubernetes API deprecation/removal
-			deprInfo, ok := deprecationMap[DeprecationKey{APIVersion: k8sSelector.APIVersion, Kind: k8sSelector.Kind}]
+			deprInfo, ok := deprecationMap[version.DeprecationKey{APIVersion: k8sSelector.APIVersion, Kind: k8sSelector.Kind}]
 			if !ok {
 				return true
 			}

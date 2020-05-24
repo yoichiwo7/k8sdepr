@@ -3,6 +3,10 @@ Go code analyzer for Kubernetes API deprecation/removal.
 As Kubernetes version goes up, the resource API such as `apps/v1beta2:Deployment` will be deprecated/removed.
 `k8sdepr` detects these API deprecation/removal in Go codes; based on the specified target Kubernetes version.
 
+If you are intrested in detecting API deprecation/removal in YAML manifests and Kubernetes cluster resources, then check follwing tools:
+
+- [FairwindsOps/pluto](https://github.com/FairwindsOps/pluto)
+
 # Install
 
 ```
@@ -58,8 +62,8 @@ go mod init github.com/spotahome/redis-operator
 go mod vendor
 
 # Check against v1.15.0 -> Detects lots of API deprecation
- k8sdepr -targetVersion v1.15.0 ./...
+k8sdepr -targetVersion v1.15.0 ./...
 
 # Check against v1.16.0 -> Detects lots of API removal
- k8sdepr -targetVersion v1.16.0 ./...
+k8sdepr -targetVersion v1.16.0 ./...
 ```

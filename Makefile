@@ -5,7 +5,7 @@ $(NAME): build
 
 .PHONY: test
 test:
-	go test -v ./...
+	go test ./...
 
 .PHONY: build
 build:

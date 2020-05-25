@@ -5,5 +5,5 @@ import (
 )
 
 type mystruct struct {
-	ingress v1beta1.Ingress // want `extensions/v1beta1:Ingress is deprecated in v1.14.0. Migrate to networking.k8s.io/v1beta1:Ingress.`
+	ingress v1beta1.Ingress // want `extensions/v1beta1:Ingress is deprecated. Migrate to networking.k8s.io/v1beta1:Ingress. {deprecated=v1.14.0, removed=v1.22.0}`
 }

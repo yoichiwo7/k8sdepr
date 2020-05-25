@@ -72,7 +72,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 			if k8sSelector.APIVersion != deprInfo.APIVersion || k8sSelector.Kind != deprInfo.Kind {
 				return true
 			}
-			if !ignoreRemoval && semver.Compare(targetVersion, deprInfo.RemovedIn) >= 0 {
+			if !ignoreRemoval && semver.Compare(targetVersion, deprInfo.RemovedIn) >= 0 && deprInfo.RemovedIn != "" {
 				pass.Report(analysis.Diagnostic{
 					Pos: k8sSelector.Selector.Pos(),
 					Message: fmt.Sprintf("%v:%v is removed. Migrate to %v:%v. {deprecated=%v, removed=%v}",
@@ -80,7 +80,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 				})
 				return true
 			}
-			if !ignoreDeprecation && semver.Compare(targetVersion, deprInfo.DeprecatedIn) >= 0 {
+			if !ignoreDeprecation && semver.Compare(targetVersion, deprInfo.DeprecatedIn) >= 0 && deprInfo.DeprecatedIn != "" {
 				pass.Report(analysis.Diagnostic{
 					Pos: k8sSelector.Selector.Pos(),
 					Message: fmt.Sprintf("%v:%v is deprecated. Migrate to %v:%v. {deprecated=%v, removed=%v}",

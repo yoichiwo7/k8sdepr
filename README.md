@@ -27,7 +27,7 @@ go get -u github.com/yoichiwo7/k8sdepr
 - `-targetVersion` flag must be set. The value must follow semantic version. (ex. `v1.16.0`)
 
 ```
-k8sdepr -targetVersion VERSION [-flag] [package]
+k8sdepr -targetVersion VERSION [-ignoreDeprecation] [-ignoreRemoval] [package]
 
 Flags:
   -targetVersion string
@@ -50,8 +50,8 @@ k8sdepr -targetVersion v1.17.0 ./...
 If the analyzer detects API deprecation or removal, it will prints message like following.
 
 ```
-/tmp/src/services.go:9:10: apps/v1beta2:Deployment is removed in v1.16.0. Migrate to apps/v1:Deployment.
-/tmp/src/ingress.go:38:10: extensions/v1beta1:Ingress is deprecated in v1.14.0. Migrate to networking.k8s.io/v1beta1:Ingress.
+/tmp/src/services.go:9:10: extensions/v1beta1:DaemonSet is removed. Migrate to apps/v1:DaemonSet. {deprecated=v1.9.0, removed=v1.16.0} 
+/tmp/src/ingress.go:38:10: extensions/v1beta1:Ingress is deprecated. Migrate to networking.k8s.io/v1beta1:Ingress. {deprecated=v1.14.0, removed=v1.22.0}
 ```
 
 ## Check Non-Module Codes

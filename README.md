@@ -18,8 +18,10 @@ If you are interested in detecting API deprecation/removal in YAML manifests and
 
 # Install
 
+The analyzer is work in progress. You need to specify wip branch as following:
+
 ```
-go get -u github.com/yoichiwo7/k8sdepr
+go get -u github.com/yoichiwo7/k8sdepr@wip
 ```
 
 # Usage

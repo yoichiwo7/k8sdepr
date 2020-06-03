@@ -2,9 +2,8 @@ name: Go
 
 on:
   push:
-    branches: [ wip ]
-  pull_request:
-    branches: [ wip ]
+    tags:
+      - v*
 
 jobs:
 

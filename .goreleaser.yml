@@ -11,6 +11,12 @@ builds:
       - -s -w
       - -X main.Version={{.Version}}
       - -X main.Revision={{.ShortCommit}}
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
     env:
       - CGO_ENABLED=0
 archives:
